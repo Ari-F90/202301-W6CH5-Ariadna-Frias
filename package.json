@@ -9,6 +9,7 @@
     "start": "cross-env PORT=4500 node./dist/index.js -w",
     "start:mon": "cross-env PORT=4500 nodemon ./dist/index.js",
     "build": "tsc -w"
+
   },
   "keywords": [
     "Node",
