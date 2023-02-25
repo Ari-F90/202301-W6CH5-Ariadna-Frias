@@ -1,7 +1,6 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable no-unused-vars */
 import { Response, Request, response } from 'express';
-import { Things } from '../models/models.js';
 import { ThingsFileRepo } from '../repository/things.file.repo.js';
 
 export class ThingsController {
