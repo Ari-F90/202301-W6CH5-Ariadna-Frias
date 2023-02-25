@@ -1,0 +1,7 @@
+[
+  { "id": 1, "name": "HTML/CSS" },
+  { "id": 2, "name": "Javascript" },
+  { "id": 3, "name": "Jest" },
+  { "id": 4, "name": "Redux" },
+  { "id": 5, "name": "Node" }
+]
