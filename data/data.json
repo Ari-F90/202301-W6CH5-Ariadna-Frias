@@ -1,7 +1,7 @@
 [
-  { "id": 1, "name": "HTML/CSS" },
-  { "id": 2, "name": "Javascript" },
-  { "id": 3, "name": "Jest" },
-  { "id": 4, "name": "Redux" },
-  { "id": 5, "name": "Node" }
+  { "id": 1, "name": "HTML/CSS", "week": 1, "level": 1 },
+  { "id": 2, "name": "Javascript", "week": 2, "level": 3 },
+  { "id": 3, "name": "Jest", "week": 3, "level": 3 },
+  { "id": 4, "name": "Redux", "week": 6, "level": 4 },
+  { "id": 5, "name": "Node", "week": 1, "level": 3 }
 ]

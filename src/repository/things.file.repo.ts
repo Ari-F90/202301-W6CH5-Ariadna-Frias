@@ -12,13 +12,34 @@ export class ThingsFileRepo {
   }
 
   async readById(id: Things['id']) {
-    const infoId = await fs.readFile(file, { encoding: 'utf-8' });
-    const dataParse: Things[] = JSON.parse(infoId);
-    return dataParse.filter((item) => item.id === id)[0];
+    const info = await fs.readFile(file, { encoding: 'utf-8' });
+    const infoParse: Things[] = JSON.parse(info);
+    return infoParse.find((item) => item.id === id);
   }
 
-  write() {}
+  async write(info: Things) {
+    const infoAdd = await fs.readFile(file, { encoding: 'utf-8' });
+    const dataInfoAdd: Things[] = JSON.parse(infoAdd);
+    const totalData = JSON.stringify([...dataInfoAdd, info]);
+    await fs.writeFile(file, totalData, { encoding: 'utf-8' });
+  }
 
-  update() {}
-  delete() {}
+  async update(info: Things) {
+    const infoUpdate = await fs.readFile(file, { encoding: 'utf-8' });
+    const dataInfoUpdate: Things[] = JSON.parse(infoUpdate);
+    const updateData = dataInfoUpdate.map((item) =>
+      item.id === info.id ? info : item
+    );
+    const finalData = JSON.stringify(updateData);
+    await fs.writeFile(file, finalData, { encoding: 'utf-8' });
+  }
+
+  async delete(id: Things['id']) {
+    const infoDelete = await fs.readFile(file, { encoding: 'utf-8' });
+    const dataInfoDelete: Things[] = JSON.parse(infoDelete);
+    const restData = JSON.stringify(
+      dataInfoDelete.filter((item) => item.id !== id)
+    );
+    await fs.writeFile(file, restData, { encoding: 'utf-8' });
+  }
 }
