@@ -1,10 +1,12 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable no-unused-vars */
-import { Response, Request, response } from 'express';
+import { Response, Request } from 'express';
 import { ThingsFileRepo } from '../repository/things.file.repo.js';
 
 export class ThingsController {
-  constructor(public repo: ThingsFileRepo) {}
+  constructor(public repo: ThingsFileRepo) {
+    this.repo = repo;
+  }
 
   getAll(_req: Request, resp: Response) {
     this.repo.read().then((data) => {
