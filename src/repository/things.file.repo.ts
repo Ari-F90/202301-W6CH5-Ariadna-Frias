@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 
 const file = 'data/data.json';
 
-import { Things } from '../models/models.js';
+import { Things } from '../models/things.js';
 
 export class ThingsFileRepo {
   read() {
@@ -37,9 +37,8 @@ export class ThingsFileRepo {
   async delete(id: Things['id']) {
     const infoDelete = await fs.readFile(file, { encoding: 'utf-8' });
     const dataInfoDelete: Things[] = JSON.parse(infoDelete);
-    const restData = JSON.stringify(
-      dataInfoDelete.filter((item) => item.id !== id)
-    );
-    await fs.writeFile(file, restData, { encoding: 'utf-8' });
+    const restData = dataInfoDelete.filter((item) => item.id !== id);
+    const restFinalData = JSON.stringify(restData);
+    await fs.writeFile(file, restFinalData, { encoding: 'utf-8' });
   }
 }
