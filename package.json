@@ -9,7 +9,8 @@
     "start:mon": "cross-env PORT=4600 nodemon ./dist/index.js",
     "build": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test:prod": ""
+    "test:prod": "",
+    "build:prod": "tsc"
   },
   "keywords": [
     "Node",
