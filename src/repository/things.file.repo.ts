@@ -23,7 +23,7 @@ export class ThingsFileRepo implements Repo<Thing> {
   async create(info: Partial<Thing>): Promise<Thing> {
     const initialData: string = await fs.readFile(file, { encoding: 'utf-8' });
     const data: Thing[] = JSON.parse(initialData);
-    info.id = String(Math.floor(Math.random() * 1000_000));
+    info.id = String(Math.floor(Math.random() * 500_000));
     const finalData = [...data, info];
     await fs.writeFile(file, JSON.stringify(finalData), 'utf-8');
     return info as Thing;
@@ -45,7 +45,7 @@ export class ThingsFileRepo implements Repo<Thing> {
 
     if (!updatedItem.id) throw new Error('Id not found');
     await fs.writeFile(file, JSON.stringify(finalData), 'utf-8');
-    return updatedItem as Thing;
+    return updatedItem;
   }
 
   async delete(id: string): Promise<void> {
