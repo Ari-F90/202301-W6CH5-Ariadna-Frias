@@ -71,6 +71,19 @@ describe('Given ThingsFileRepo', () => {
       ).rejects.toThrow();
       expect(fs.readFile).toHaveBeenCalled();
     });
+    test('Then it should throw an error if it has a different id', () => {
+      (fs.readFile as jest.Mock).mockResolvedValue(
+        '[{ "id": "1", "name": "test", "week": 3, "level": 2 }]'
+      );
+      expect(async () =>
+        repo.update({
+          name: 'test',
+          week: 2,
+          level: 2,
+        })
+      ).rejects.toThrow();
+      expect(fs.readFile).toHaveBeenCalled();
+    });
   });
   describe('When I use delete method', () => {
     test('Then if the ID if ound, then should delete the thing', async () => {
