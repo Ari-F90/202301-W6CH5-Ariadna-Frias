@@ -1,7 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import { thingsRouter } from './router/things.router.js';
+import { thingsRouter } from './routers/things.router.js';
 
 export const app = express();
 app.disable('x-powered-by');
