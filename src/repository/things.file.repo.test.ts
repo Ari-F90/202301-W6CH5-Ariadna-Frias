@@ -73,7 +73,7 @@ describe('Given ThingsFileRepo', () => {
     });
   });
   describe('When I use delete method', () => {
-    test('Then it should delete the thing', async () => {
+    test('Then if the ID if ound, then should delete the thing', async () => {
       (fs.readFile as jest.Mock).mockResolvedValue(
         '[{ "id": "1", "name": "test", "week": 3, "level": 2 }]'
       );
