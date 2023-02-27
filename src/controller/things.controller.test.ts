@@ -18,7 +18,7 @@ describe('Given ThingsController', () => {
   const resp = {
     json: jest.fn(),
   } as unknown as Response;
-  const next = jest.fn();
+  const next = jest.fn() as NextFunction;
 
   const controller = new ThingsController(repo);
 
