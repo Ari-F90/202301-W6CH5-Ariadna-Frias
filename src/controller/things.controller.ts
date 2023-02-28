@@ -1,14 +1,18 @@
-/* eslint-disable no-useless-constructor */
-/* eslint-disable no-unused-vars */
 import { Response, Request, NextFunction } from 'express';
-import { Repo } from '../repository/repo.interface';
-import { Thing } from '../entities/thing';
+import { Repo } from '../repository/repo.interface.js';
+import { Thing } from '../entities/thing.js';
 
+import createDebug from 'debug';
+const debug = createDebug('W6:controller');
 export class ThingsController {
-  constructor(public repo: Repo<Thing>) {}
+  // eslint-disable-next-line no-useless-constructor, no-unused-vars
+  constructor(public repo: Repo<Thing>) {
+    debug('Instantianted');
+  }
 
   async getAll(_req: Request, resp: Response, next: NextFunction) {
     try {
+      debug('getAll');
       const data = await this.repo.query();
       resp.json({
         results: data,
@@ -20,6 +24,7 @@ export class ThingsController {
 
   async get(req: Request, resp: Response, next: NextFunction) {
     try {
+      debug('get');
       const data = await this.repo.queryId(req.params.id);
       resp.json({
         results: [data],
@@ -31,6 +36,7 @@ export class ThingsController {
 
   async post(req: Request, resp: Response, next: NextFunction) {
     try {
+      debug('post');
       const data = await this.repo.create(req.body);
       resp.json({
         results: [data],
@@ -42,6 +48,7 @@ export class ThingsController {
 
   async patch(req: Request, resp: Response, next: NextFunction) {
     try {
+      debug('patch');
       req.body.id = req.params.id ? req.params.id : req.body.id;
       const data = await this.repo.update(req.body);
       resp.json({
@@ -54,7 +61,8 @@ export class ThingsController {
 
   async delete(req: Request, resp: Response, next: NextFunction) {
     try {
-      this.repo.delete(req.params.id);
+      debug('delete');
+      await this.repo.delete(req.params.id);
       resp.json({
         results: [],
       });
