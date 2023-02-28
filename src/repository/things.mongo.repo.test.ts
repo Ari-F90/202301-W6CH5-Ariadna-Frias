@@ -20,13 +20,19 @@ describe('Given ThingsMongoRepo', () => {
   });
 
   describe('When I use queryId method', () => {
-    test('Then it should return an object', async () => {
+    test('Then it should return an object if it has a valid id', async () => {
       (ThingModel.findById as jest.Mock).mockResolvedValue({ id: '1' });
       const id = '1';
       const result = await repo.queryId(id);
       expect(ThingModel.findById).toHaveBeenCalled();
       expect(result).toEqual({ id: '1' });
     });
+  });
+  test('Then it should throw an error if it has a NO valid id', async () => {
+    (ThingModel.findById as jest.Mock).mockResolvedValue(undefined);
+    const id = '1';
+    expect(async () => repo.queryId(id)).rejects.toThrow();
+    expect(ThingModel.findById).toHaveBeenCalled();
   });
 
   describe('When I use create method', () => {
@@ -42,7 +48,7 @@ describe('Given ThingsMongoRepo', () => {
         level: 3,
       };
       const result = await repo.create(newThing);
-      expect(result).toStrictEqual(newThing);
+      expect(result).toEqual(newThing);
     });
   });
 
@@ -56,12 +62,12 @@ describe('Given ThingsMongoRepo', () => {
       });
       const result = await repo.update({
         id: '1',
-        name: 'thing',
+        name: 'test',
         week: 2,
         level: 3,
       });
       expect(ThingModel.findByIdAndUpdate).toHaveBeenCalled();
-      expect(result).toStrictEqual({
+      expect(result).toEqual({
         id: '1',
         name: 'thing',
         week: 2,
@@ -70,13 +76,13 @@ describe('Given ThingsMongoRepo', () => {
     });
     describe('When I use delete method', () => {
       test('Then if the ID found, then should delete the thing', async () => {
-        (ThingModel.findByIdAndDelete as jest.Mock).mockResolvedValue(
-          '[{"id": "1"}]'
-        );
+        (ThingModel.findByIdAndDelete as jest.Mock).mockResolvedValue([
+          { id: '1' },
+        ]);
         const id = '1';
         const result = await repo.delete(id);
         expect(ThingModel.findByIdAndDelete).toHaveBeenCalled();
-        expect(result).toBeUndefined();
+        expect(result).toBe(undefined);
       });
     });
   });
