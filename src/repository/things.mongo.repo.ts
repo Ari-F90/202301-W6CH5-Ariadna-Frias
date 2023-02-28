@@ -31,7 +31,7 @@ export class ThingsMongoRepo implements Repo<Thing> {
 
   async update(info: Partial<Thing>): Promise<Thing> {
     debug('update');
-    const data = await ThingModel.findByIdAndUpdate(info._id, info, {
+    const data = await ThingModel.findByIdAndUpdate(info.id, info, {
       new: true,
     });
     if (!data) throw new HTTPError(404, 'Not found', 'Id not found in update');
