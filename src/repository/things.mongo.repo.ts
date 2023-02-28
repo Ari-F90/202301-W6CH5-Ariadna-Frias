@@ -6,6 +6,10 @@ import createDebug from 'debug';
 const debug = createDebug('W6:repo');
 
 export class ThingsMongoRepo implements Repo<Thing> {
+  constructor() {
+    debug('Instantiated');
+  }
+
   async query(): Promise<Thing[]> {
     debug('query');
     const data = await ThingModel.find();
