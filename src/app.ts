@@ -27,6 +27,8 @@ app.get('/', (_req, resp) => {
   });
 });
 
+app.use(express.static('public/images/favicon.ico'));
+
 app.use(
   (error: CustomError, _req: Request, resp: Response, _next: NextFunction) => {
     debug('Soy el middleware de errores');
