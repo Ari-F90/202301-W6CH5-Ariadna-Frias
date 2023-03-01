@@ -1,4 +1,5 @@
 import { Response, Request, NextFunction } from 'express';
+import { Thing } from '../entities/thing';
 import { ThingsFileRepo } from '../repository/things.file.repo';
 import { ThingsController } from './things.controller';
 
@@ -9,6 +10,9 @@ describe('Given ThingsController', () => {
     queryId: jest.fn(),
     update: jest.fn(),
     delete: jest.fn(),
+    search(query: { key: string; value: unknown }): Promise<Thing[]> {
+      throw new Error('Function not implemented.');
+    },
   };
 
   const req = {

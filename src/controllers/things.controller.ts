@@ -60,9 +60,10 @@ export class ThingsController {
   }
 
   async delete(req: Request, resp: Response, next: NextFunction) {
+    debug('delete');
     try {
-      debug('delete');
-      await this.repo.delete(req.params.id);
+      const paramId = req.params.id;
+      await this.repo.delete(paramId);
       resp.json({
         results: [],
       });

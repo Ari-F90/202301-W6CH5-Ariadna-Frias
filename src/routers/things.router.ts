@@ -1,6 +1,6 @@
 /* eslint-disable new-cap */
 import { Router } from 'express';
-import { ThingsController } from '../controller/things.controller.js';
+import { ThingsController } from '../controllers/things.controller.js';
 import { ThingsMongoRepo } from '../repository/things.mongo.repo.js';
 
 export const thingsRouter = Router();
